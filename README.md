@@ -1,10 +1,19 @@
 # Installing Windows 11 on EVE
-How to :
-1. You need [EVE](https://github.com/lf-edge/eve) 13.4.0 or higher.
-2. Make sure you have Qemu and SWTPM installed.
-3. Download [install.sh](install.sh), this installation script simulates the EVE envirnment as close as possible.
+To Run Windows 11 on EVE you need [EVE](https://github.com/lf-edge/eve) 13.4.0 or higher.
+
+1. Make sure you have Qemu and SWTPM installed on your kvm hypervisor.
+```
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y qemu qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virt-manager ovmf
+sudo apt install -y swtpm swtpm-tools
+```
+2. Clone this repository: 
+```
+git clone https://github.com/sergio-zededa/win11-image-on-eve.git
+```
+3. Verify the [install.sh](install.sh), this installation script simulates the EVE environment as close as possible.
 4. Download Windows 11 iso from Microsoft website, in the `install.sh` make sure `WINDOWS_ISO` point to the installation iso path.
-5. The `install.sh` is configured to use VNC as display, have a VNC client handy to connect to localhost:5901.
+5. The `install.sh` is configured to use VNC as display, have a VNC client (RealVNC) handy to connect to localhost:5901.
 6. Run `install.sh` and proceed with the Windows installation, the `install.sh` downloads the required UEFI (OVMF) firmware and VirtIO driver before laucnhing the VM.
 7. When reaching the drive selection screen you will see an empty list : ![image](https://github.com/user-attachments/assets/db2c93d3-b2a1-4e09-abd7-25163b843f4f)
 8. Click on "Load driver to access your hardware" and select virtio-win CD drive: ![image](https://github.com/user-attachments/assets/3c1c86e4-47b9-4d88-b675-87f174dc4972)
